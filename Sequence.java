@@ -1,18 +1,9 @@
-import java.awt.List;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.Stream;
-
 
 public class Sequence {
 	//create array to put the values of the input.txt
@@ -24,8 +15,7 @@ public class Sequence {
 	
 	//constructs sequence
 	public Sequence(int count,int prevcount) {
-		this.count=count;
-		this.bigger=bigger;
+		Sequence.count=count;
 	}
 	
 	
@@ -49,7 +39,7 @@ public class Sequence {
         //prints the completed list
         System.out.println(list);
         //System.out.println(list.size());   
-        Counts.bigger=0;
+        Sequence.bigger=0;
         
        //for loop that iterates through the list in pairs, index {0,1},{2,3}..etc
         for(int i=0;i<list.size()-1;i+=2) {
@@ -64,36 +54,27 @@ public class Sequence {
         	for(int j=start;j<end;j++) {
         	
         		//reset cycle count to zero.
-        		Counts.count=0;
+        		Sequence.count=0;
         		//call algorithm function
         		algo(j,Counts);
         		//if the new cycle count is bigger then previous, set biggest cycle count equal to current
-        		if(Counts.count>Counts.bigger) {
-        			Counts.bigger=Counts.count;
-        		}
-        		
-
+        		if(Sequence.count>Sequence.bigger) {
+        			Sequence.bigger=Sequence.count;
+        		}  		
         	}
         	System.out.print("Highest Sequence is: ");
-        	System.out.println(Counts.bigger);
-			
+        	System.out.println(Sequence.bigger);		
         	//write to the file
         	out.write(start+" ");
         	out.write(end+" ");
         	
-        	out.write(Counts.bigger+ "\n");
+        	out.write(Sequence.bigger+ "\n");
         	Sequence.bigger=0;
-			Counts.bigger=0;
-        	
-        	
+			Sequence.bigger=0;       	
         }
+        input.close();
         out.close();
-        
-    
-
-
     }
-    
     public static int algo(int curr, Sequence Counts) {
     ///curr is 1
     //end is 10
@@ -109,43 +90,25 @@ public class Sequence {
     		}
 
     	}
-    	
     	else if(curr==1){
     		System.out.print("This is count of current ");
         	
-        	Counts.count++;
-        	System.out.println(Counts.count);;
+        	Sequence.count++;
+        	System.out.println(Sequence.count);;
             
-        	Counts.count=count;
-
-            return Counts.count;
+            return Sequence.count;
     	}
-    	
-    	
-    	
-    	return Counts.count;
-		
-    	
-		
-    	
+    	return Sequence.count;
     }
-    
-    
-    public static int ifEven(int curr ,Sequence Counts){
-    
-    	curr=curr/2;
-    	
-    	Counts.count++;
-        return algo(curr, Counts);
-    
+    public static int ifEven(int curr ,Sequence Counts){   
+    	curr=curr/2; 	
+    	Sequence.count++;
+        return algo(curr, Counts); 
     }
-    
     public static int ifOdd(int curr, Sequence Counts) {
     	curr=(curr*3)+1;
-    	Counts.count++;
+    	Sequence.count++;
         return algo(curr, Counts);
-
-
     }
     
 }
